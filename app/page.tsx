@@ -1,64 +1,89 @@
-import Image from "next/image";
-
 export default function Home() {
+  const targets = [
+    {
+      name: "Word",
+      format: ".docx",
+      description: "Keeps paragraphs, headings, and list structure.",
+    },
+    {
+      name: "JPG",
+      format: ".jpg",
+      description: "Great for slides, social posts, and previews.",
+    },
+    {
+      name: "PNG",
+      format: ".png",
+      description: "Lossless pages with transparent-safe quality.",
+    },
+    {
+      name: "HTML",
+      format: ".html",
+      description: "Export content as web-ready markup.",
+    },
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="site-shell">
+      <header className="topbar container">
+        <div className="brand-block">
+          <p className="brand-kicker">Cawnverter Studio</p>
+          <h1>PDF Converter</h1>
+        </div>
+        <p className="status-pill" aria-label="Service status">
+          Live and ready
+        </p>
+      </header>
+
+      <main className="container page-grid">
+        <section className="hero">
+          <p className="eyebrow">Fast document transformations</p>
+          <h2>Convert your PDF to Word, JPG, PNG, or HTML in one place.</h2>
+          <p className="hero-copy">
+            Upload once, choose your target format, and export clean files in a
+            few clicks. The interface is optimized for both desktop and mobile
+            workflows.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+          <div className="target-grid" role="list" aria-label="Supported output types">
+            {targets.map((target) => (
+              <article key={target.name} className="target-card" role="listitem">
+                <p className="target-title">{target.name}</p>
+                <p className="target-format">{target.format}</p>
+                <p className="target-description">{target.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="convert-panel" aria-labelledby="convert-heading">
+          <h3 id="convert-heading">Start conversion</h3>
+          <form className="convert-form" action="#" method="post">
+            <label htmlFor="pdf-upload">1) Upload PDF file</label>
+            <input id="pdf-upload" name="pdf-upload" type="file" accept="application/pdf" required />
+
+            <label htmlFor="target-format">2) Choose output type</label>
+            <select id="target-format" name="target-format" defaultValue="docx" required>
+              <option value="docx">Word (.docx)</option>
+              <option value="jpg">JPG (.jpg)</option>
+              <option value="png">PNG (.png)</option>
+              <option value="html">HTML (.html)</option>
+            </select>
+
+            <label htmlFor="email">3) Optional delivery email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+            <button type="submit">Convert PDF</button>
+            <p className="form-note">
+              Front-end demo is ready. Connect this form to your conversion API
+              or worker to process files server-side.
+            </p>
+          </form>
+        </section>
       </main>
     </div>
   );
