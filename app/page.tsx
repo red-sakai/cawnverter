@@ -1,90 +1,79 @@
-export default function Home() {
-  const targets = [
-    {
-      name: "Word",
-      format: ".docx",
-      description: "Keeps paragraphs, headings, and list structure.",
-    },
-    {
-      name: "JPG",
-      format: ".jpg",
-      description: "Great for slides, social posts, and previews.",
-    },
-    {
-      name: "PNG",
-      format: ".png",
-      description: "Lossless pages with transparent-safe quality.",
-    },
-    {
-      name: "HTML",
-      format: ".html",
-      description: "Export content as web-ready markup.",
-    },
-  ];
+import Link from "next/link";
 
+const features = [
+  {
+    title: "Structured Word output",
+    text: "Keeps headings, paragraph flow, and list hierarchy intact.",
+  },
+  {
+    title: "High quality images",
+    text: "Generate JPG or PNG pages with predictable rendering.",
+  },
+  {
+    title: "Web ready HTML",
+    text: "Export clean markup for publishing and CMS workflows.",
+  },
+];
+
+export default function Home() {
   return (
     <div className="site-shell">
-      <header className="topbar container">
-        <div className="brand-block">
-          <p className="brand-kicker">Cawnverter Studio</p>
-          <h1>PDF Converter</h1>
-        </div>
-        <p className="status-pill" aria-label="Service status">
-          Live and ready
+      <section className="landing-hero container">
+        <p className="eyebrow">PDF conversion without friction</p>
+        <h1>From upload to usable files in minutes, not hours.</h1>
+        <p className="hero-copy">
+          Cawnverter is built for teams that need fast exports with reliable
+          formatting. Start with a focused landing experience, then move into
+          the conversion workspace only when you are ready.
         </p>
-      </header>
 
-      <main className="container page-grid">
-        <section className="hero">
-          <p className="eyebrow">Fast document transformations</p>
-          <h2>Convert your PDF to Word, JPG, PNG, or HTML in one place.</h2>
-          <p className="hero-copy">
-            Upload once, choose your target format, and export clean files in a
-            few clicks. The interface is optimized for both desktop and mobile
-            workflows.
-          </p>
+        <div className="hero-actions">
+          <Link href="/convert" className="hero-primary">
+            Open converter
+          </Link>
+          <Link href="/#features" className="hero-secondary">
+            Explore features
+          </Link>
+        </div>
+      </section>
 
-          <div className="target-grid" role="list" aria-label="Supported output types">
-            {targets.map((target) => (
-              <article key={target.name} className="target-card" role="listitem">
-                <p className="target-title">{target.name}</p>
-                <p className="target-format">{target.format}</p>
-                <p className="target-description">{target.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+      <section id="features" className="container feature-section" aria-labelledby="features-title">
+        <div className="section-heading">
+          <p className="brand-kicker">What you get</p>
+          <h2 id="features-title">Purpose built for practical file workflows</h2>
+        </div>
 
-        <section className="convert-panel" aria-labelledby="convert-heading">
-          <h3 id="convert-heading">Start conversion</h3>
-          <form className="convert-form" action="#" method="post">
-            <label htmlFor="pdf-upload">1) Upload PDF file</label>
-            <input id="pdf-upload" name="pdf-upload" type="file" accept="application/pdf" required />
+        <div className="feature-grid" role="list" aria-label="Platform features">
+          {features.map((feature) => (
+            <article key={feature.title} className="feature-card" role="listitem">
+              <h3>{feature.title}</h3>
+              <p>{feature.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
-            <label htmlFor="target-format">2) Choose output type</label>
-            <select id="target-format" name="target-format" defaultValue="docx" required>
-              <option value="docx">Word (.docx)</option>
-              <option value="jpg">JPG (.jpg)</option>
-              <option value="png">PNG (.png)</option>
-              <option value="html">HTML (.html)</option>
-            </select>
+      <section id="how-it-works" className="container steps-section" aria-labelledby="steps-title">
+        <div className="section-heading">
+          <p className="brand-kicker">Simple process</p>
+          <h2 id="steps-title">Three steps to convert and ship</h2>
+        </div>
 
-            <label htmlFor="email">3) Optional delivery email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-            />
-
-            <button type="submit">Convert PDF</button>
-            <p className="form-note">
-              Front-end demo is ready. Connect this form to your conversion API
-              or worker to process files server-side.
-            </p>
-          </form>
-        </section>
-      </main>
+        <ol className="steps-grid">
+          <li>
+            <span>1</span>
+            Upload your PDF and set an output target.
+          </li>
+          <li>
+            <span>2</span>
+            Run conversion and validate the preview.
+          </li>
+          <li>
+            <span>3</span>
+            Download instantly or route via email.
+          </li>
+        </ol>
+      </section>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "./globals.css";
 
@@ -13,8 +14,8 @@ const bodyFont = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Cawnverter | PDF Converter",
-  description: "Convert PDF files to Word, JPG, PNG, or HTML.",
+  title: "Cawnverter | Smart PDF Conversion",
+  description: "Landing page and conversion workspace for PDF exports.",
 };
 
 export default function RootLayout({
@@ -27,7 +28,28 @@ export default function RootLayout({
       lang="en"
       className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full">
+        <div className="app-frame">
+          <header className="navbar-wrap">
+            <div className="container navbar">
+              <Link href="/" className="brand-link" aria-label="Cawnverter home">
+                Cawnverter
+              </Link>
+
+              <nav className="nav-links" aria-label="Primary">
+                <Link href="/">Home</Link>
+                <Link href="/#features">Features</Link>
+                <Link href="/#how-it-works">How it works</Link>
+                <Link href="/convert" className="nav-cta">
+                  Convert now
+                </Link>
+              </nav>
+            </div>
+          </header>
+
+          <main className="app-main">{children}</main>
+        </div>
+      </body>
     </html>
   );
 }

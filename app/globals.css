@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3ede2;
-  --foreground: #1f1d17;
+  --background: #f7f0e0;
+  --foreground: #17150f;
   --surface: #fff8eb;
-  --surface-strong: #f7e8cb;
-  --ink-soft: #6b614b;
-  --line: #d8c8a9;
-  --accent: #ca4d2f;
-  --accent-ink: #fff8ef;
+  --surface-strong: #f6e7c9;
+  --ink-soft: #645943;
+  --line: #ddccac;
+  --accent: #be4d1e;
+  --accent-ink: #fff8f0;
+  --secondary: #1f5d5b;
   --radius: 22px;
 }
 
@@ -20,7 +21,10 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(226, 164, 83, 0.28) 0%, transparent 38%),
+    radial-gradient(circle at 92% 18%, rgba(31, 93, 91, 0.2) 0%, transparent 32%),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-manrope), "Segoe UI", sans-serif;
   min-height: 100dvh;
@@ -30,6 +34,15 @@ h1,
 h2,
 h3 {
   font-family: var(--font-bricolage), "Trebuchet MS", sans-serif;
+}
+
+.app-frame {
+  min-height: 100dvh;
+}
+
+.app-main {
+  padding-top: 0.8rem;
+  padding-bottom: 2.2rem;
 }
 
 .site-shell {
@@ -70,49 +83,75 @@ h3 {
   margin: 0 auto;
 }
 
-.topbar {
+.navbar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--background) 78%, white 22%);
+  border-bottom: 1px solid color-mix(in oklab, var(--line) 85%, white 15%);
+}
+
+.navbar {
   display: flex;
   justify-content: space-between;
-  align-items: end;
-  gap: 16px;
-  padding-top: 2.5rem;
-  animation: reveal-down 620ms ease both;
+  align-items: center;
+  gap: 1rem;
+  min-height: 72px;
+}
+
+.brand-link {
+  font-family: var(--font-bricolage), "Trebuchet MS", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  font-size: 1.23rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.nav-links a {
+  font-size: 0.95rem;
+  color: color-mix(in oklab, var(--foreground) 88%, black 12%);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-links .nav-cta {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 999px;
+  padding: 0.5rem 0.92rem;
+  border: 1px solid color-mix(in oklab, var(--accent) 78%, black 22%);
+}
+
+.landing-hero {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(2rem, 4vw, 3.4rem);
+  animation: reveal-up 700ms ease 80ms both;
+}
+
+.landing-hero h1 {
+  margin-top: 0.9rem;
+  max-width: 14ch;
+  font-size: clamp(2.2rem, 8vw, 4.7rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 
 .brand-kicker {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.72rem;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.15rem;
   color: var(--ink-soft);
-}
-
-.brand-block h1 {
-  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.status-pill {
-  border: 1px solid color-mix(in oklab, var(--line) 90%, white 10%);
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--surface) 80%, white 20%);
-  padding: 0.5rem 0.95rem;
-  font-size: 0.84rem;
-  color: var(--ink-soft);
-}
-
-.page-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 2rem;
-  align-items: start;
-  padding-top: 2rem;
-  padding-bottom: 2.5rem;
-}
-
-.hero {
-  animation: reveal-up 700ms ease 120ms both;
 }
 
 .eyebrow {
@@ -125,14 +164,6 @@ h3 {
   background: color-mix(in oklab, var(--surface) 92%, white 8%);
 }
 
-.hero h2 {
-  margin-top: 1rem;
-  font-size: clamp(2rem, 6vw, 4rem);
-  line-height: 1.03;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
 .hero-copy {
   margin-top: 1rem;
   max-width: 62ch;
@@ -140,8 +171,128 @@ h3 {
   line-height: 1.6;
 }
 
+.hero-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hero-actions a {
+  text-decoration: none;
+  border-radius: 12px;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.hero-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: color-mix(in oklab, var(--accent) 76%, black 24%);
+}
+
+.hero-secondary {
+  background: color-mix(in oklab, var(--surface) 86%, white 14%);
+  color: var(--foreground);
+  border-color: color-mix(in oklab, var(--line) 88%, black 12%);
+}
+
+.feature-section,
+.steps-section {
+  padding-top: 0.8rem;
+  padding-bottom: 1.8rem;
+}
+
+.section-heading h2 {
+  font-size: clamp(1.5rem, 4.5vw, 2.45rem);
+  letter-spacing: -0.02em;
+}
+
+.feature-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.feature-card {
+  background: color-mix(in oklab, var(--surface) 84%, white 16%);
+  border: 1px solid color-mix(in oklab, var(--line) 86%, black 14%);
+  border-radius: 16px;
+  padding: 1rem;
+  animation: reveal-up 620ms ease both;
+}
+
+.feature-card h3 {
+  font-size: 1.07rem;
+  line-height: 1.2;
+}
+
+.feature-card p {
+  margin-top: 0.55rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.steps-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  list-style: none;
+  padding: 0;
+}
+
+.steps-grid li {
+  border-radius: 16px;
+  border: 1px solid color-mix(in oklab, var(--line) 84%, black 16%);
+  background: linear-gradient(160deg, var(--surface) 0%, var(--surface-strong) 100%);
+  padding: 0.95rem;
+  line-height: 1.45;
+}
+
+.steps-grid li span {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  margin-right: 0.45rem;
+  background: var(--secondary);
+  color: #ebfffd;
+  font-weight: 700;
+}
+
+.convert-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.6rem;
+  align-items: start;
+  padding-top: 1.2rem;
+}
+
+.convert-intro h1 {
+  margin-top: 0.95rem;
+  font-size: clamp(1.9rem, 6vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.convert-intro p {
+  margin-top: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 64ch;
+}
+
 .target-grid {
-  margin-top: 1.4rem;
+  margin-top: 1.2rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem;
@@ -181,7 +332,7 @@ h3 {
   animation: reveal-up 700ms ease 220ms both;
 }
 
-.convert-panel h3 {
+.convert-panel h2 {
   font-size: 1.5rem;
   letter-spacing: -0.01em;
 }
@@ -260,18 +411,36 @@ h3 {
 }
 
 @media (max-width: 920px) {
-  .page-grid {
+  .navbar {
+    min-height: 64px;
+  }
+
+  .nav-links {
+    gap: 0.65rem;
+  }
+
+  .feature-grid,
+  .steps-grid,
+  .convert-layout {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding-bottom: 2rem;
+    gap: 1rem;
   }
 
   .target-grid {
     grid-template-columns: 1fr;
   }
 
-  .convert-panel {
-    margin-top: 0.2rem;
+  .hero-actions a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
   }
 }
 
