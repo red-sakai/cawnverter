@@ -48,6 +48,17 @@ export default function RootLayout({
           </header>
 
           <main className="app-main">{children}</main>
+
+          <footer className="site-footer">
+            <div className="container site-footer-inner">
+              <p>&copy; {new Date().getFullYear()} Cawnverter</p>
+              <nav aria-label="Footer" className="footer-links">
+                <Link href="/">Home</Link>
+                <Link href="/#features">Features</Link>
+                <Link href="/convert">Convert</Link>
+              </nav>
+            </div>
+          </footer>
         </div>
       </body>
     </html>
