@@ -37,7 +37,7 @@ export default function RootLayout({
 
           <footer className="site-footer">
             <div className="container site-footer-inner">
-              <p>&copy; {new Date().getFullYear()} Cawnverter</p>
+              <p>&copy; {new Date().getFullYear()} Cawnverter · Made by jhered</p>
               <nav aria-label="Footer" className="footer-links">
                 <Link href="/">Home</Link>
                 <Link href="/#features">Features</Link>
