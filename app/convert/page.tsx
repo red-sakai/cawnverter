@@ -45,10 +45,24 @@ export default function ConvertPage() {
         </div>
 
         <section className="convert-panel" aria-labelledby="convert-heading">
-          <h2 id="convert-heading">Start conversion</h2>
+          <header className="panel-head">
+            <div>
+              <p className="panel-kicker">Workspace</p>
+              <h2 id="convert-heading">Start conversion</h2>
+            </div>
+            <div className="panel-steps" aria-hidden="true">
+              <span className="step is-active">Upload</span>
+              <span className="step">Target</span>
+              <span className="step">Deliver</span>
+            </div>
+          </header>
           <form className="convert-form" action="#" method="post">
             <label htmlFor="pdf-upload">1) Upload PDF file</label>
-            <input id="pdf-upload" name="pdf-upload" type="file" accept="application/pdf" required />
+            <label className="dropzone" htmlFor="pdf-upload">
+              <span className="dropzone-title">Drag and drop your PDF</span>
+              <span className="dropzone-subtitle">Or click to browse</span>
+              <input id="pdf-upload" name="pdf-upload" type="file" accept="application/pdf" required />
+            </label>
 
             <label htmlFor="target-format">2) Choose output type</label>
             <select id="target-format" name="target-format" defaultValue="docx" required>
